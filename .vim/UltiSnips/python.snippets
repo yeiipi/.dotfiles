@@ -1,0 +1,60 @@
+snippet com "New commet" w
+# ${1:${VISUAL}} | `date +%d`.`date +%m`.`date +%Y` | `whoami` $0
+endsnippet
+
+snippet COM "BIG COMMENT" b
+# ====| $1 |==== #
+$0
+endsnippet
+
+snippet docu "documentación" b
+"""
+DESCRIPCIÓN:
+----
+	$1
+RETORNA:
+----
+	$0
+"""
+
+endsnippet
+
+snippet class "new class" b
+class $1:
+	def __init__(self,$2):
+		$0
+endsnippet
+
+snippet IFN " if main " b
+if __name__ == '__main__':
+    ${1:main()}$0
+endsnippet
+
+snippet def "new fun" b
+def ${1:fun_name}(${2:args}):
+	$0
+endsnippet
+
+snippet defs "new self fun" b
+def ${1:fun_name}(self,${2:args}):
+	$0
+endsnippet
+
+snippet if "if" b
+if ( ${1:True} ):
+	$0
+endsnippet
+
+snippet while "while" b
+while ( ${1:True} ):
+	$0
+endsnippet
+
+snippet for "for loop" b
+for ${1:i} in ${2:range(${3:0},${4:nnn})}:
+	$0
+endsnippet
+
+snippet from "from import" b
+from $1 import $0
+endsnippet

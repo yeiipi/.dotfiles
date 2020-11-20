@@ -1,0 +1,30 @@
+snippet book "" wA
+@book{${1:ref_name},
+	author = {${2:${3:last_name},${4:first_name}}},
+	title = {${5:book_name}},
+	year = {${6:year}},
+	publisher = {${7:publisher}}
+	}
+endsnippet
+
+snippet article "" wA
+@article{${1:ref_name},
+	title = {${2:article_name}},
+	author = {${3:${4:last_name},${5:first_name}}},
+	year = {${6:year}},
+	journal = {${7:journal_name}},
+	volume = {${8:volume_num}},
+	page = {${9:page_or_pages(x,x--y)}}
+	}
+endsnippet
+
+snippet online "" wA
+@online{${1:ref_name},
+	author = {${2:${3:last_name},${4:first_name}}},
+	title = {${5:web_title}},
+	date = {${6:date}},
+	url = {${7:web_url}},
+	year = {${8:year}}
+	}
+endsnippet
+

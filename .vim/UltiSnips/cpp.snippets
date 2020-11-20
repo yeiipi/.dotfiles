@@ -1,0 +1,95 @@
+snippet ejercicio "descripcion ejercicio" wA
+/*
+
+====| I N S T R U C C I O N E S |====
+
+$0
+
+====| T O D O |====
+
+*/
+endsnippet
+
+snippet inc "#include<>" w
+#include<$1>$0
+endsnippet
+
+snippet uns "using namespace std;" wA
+using namespace std;
+endsnippet
+
+
+snippet ffun "new fun" bA
+
+${1:void} ${2:fun_name}(${3:args});
+
+$1 $2($3) {
+	$0
+}
+endsnippet
+
+snippet main "main(){return 0;}" w
+int main () {
+
+	$0
+
+
+
+	return 0;
+}
+endsnippet
+
+#snippet if "if" w
+#if ($1) {
+#	$0
+#}
+#endsnippet
+
+snippet else "else" w
+else {
+	$0
+}
+endsnippet
+
+snippet while "while" b
+while (${1:true}) {
+	$0
+}
+endsnippet
+
+snippet for "for" b
+for (${1:int} ${2:i} = ${3:0};$2 ${4:<} $5; $2++) {
+	$0
+}
+endsnippet
+
+snippet FOR "for a in b" bA
+for (${1:int} ${2:elem} : $3) {
+	$0
+}
+endsnippet
+
+snippet cout "cout << $1 << endl;" bA
+cout << $1 << ${2:endl};
+endsnippet
+
+snippet '---' "->" rA
+->$0
+endsnippet
+
+snippet cla "An entire .h generator" b
+#ifndef ${2:file_name}
+#define $2
+
+class ${1:class_name}
+{
+private:
+	$3
+
+public:
+	$1();
+};
+
+#endif /* $2 */
+endsnippet
+
