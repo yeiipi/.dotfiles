@@ -138,5 +138,19 @@ alias ghidra="/home/jpi/programs/ghidra_9.1.2_PUBLIC/ghidraRun"
 alias newfonts="fc-cache -f -v"
 alias webstorm="webstorm.sh & disown"
 alias cleon="sh /opt/clion-*/bin/clion.sh & disown"
+alias obsidian="~/programs/Obsidian-0.10.6.AppImage & disown"
+alias kr="ibus-setup & disown"
+alias matlab="/usr/local/MATLAB/R2020b/bin/matlab & disown"
+
+
+
+# Variables de entorno
+UN_PATH="/home/jpi/.dotfiles/.USER"
+read -d $'\x04' UR_USERNAME < "$UN_PATH"
+export UR_USERNAME
+
+UP_PATH="/home/jpi/.dotfiles/.PASS"
+read -d $'\x04' UR_PASSWORD < "$UP_PATH"
+export UR_PASSWORD
 
 

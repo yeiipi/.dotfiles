@@ -149,6 +149,12 @@ snippet desc "Description" b
 \end{description}
 endsnippet
 
+snippet minipage "new mini page" w
+\begin{minipage}{ ${1:0.50} \\textwidth}
+	${0:${VISUAL}}
+\end{minipage}
+endsnippet
+
 snippet iit "desc item" b
 \item[$1]$0
 endsnippet
@@ -508,7 +514,7 @@ snippet lll "l" iA
 endsnippet
 
 # context "math()"
-snippet nabl "nabla" iA
+snippet nabla "nabla" iA
 \nabla
 endsnippet
 
@@ -737,6 +743,17 @@ endsnippet
 snippet MM "Math letter" i
 \mathbb{$1} $0
 endsnippet
+
+snippet OR "" i
+\vee $0
+endsnippet
+
+snippet AND "" i
+\wedge $0
+endsnippet
+
+
+
 # ====| text edit |==== #
 snippet ee "\emph{text}" w
 \emph{${1:${VISUAL:emphasize}}}$0

@@ -1,3 +1,5 @@
 .template.txt
-./.vim/undodir/*
+.vim/undodir/*
+.PASS
+.USER
 
