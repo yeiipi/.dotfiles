@@ -1,0 +1,416 @@
+#+TITLE: vimrc config
+#+PROPERTY: header-args :tangle .vimrc
+#+AUTHOR: Yeiipi
+
+En este archivo se encuentra la configuración que utilizo para mi ~.vimrc~.
+
+* Tabla de contenidos :toc:
+- [[#nativos-de-vim][Nativos de Vim]]
+  - [[#setup-inicial][Setup inicial]]
+  - [[#autocmd-básico][Autocmd básico]]
+  - [[#comentarios-de-ayuda][Comentarios de ayuda]]
+- [[#plugins-y-keybindigns][Plugins y Keybindigns]]
+  - [[#cargar-plug][Cargar Plug]]
+  - [[#configuración-plugins-y-keybindings-relacionados][Configuración Plugins y Keybindings Relacionados]]
+  - [[#keybindigns-personales][Keybindigns Personales]]
+  - [[#keybindigs-especificas-para-algunos-tipos-de-archivos][Keybindigs Especificas para algunos tipos de archivos]]
+
+* Nativos de Vim
+** Setup inicial
+
+- Lo primero es aplicar el sentido común y utilizar la barra espaciadora como tecla lider:
+
+#+begin_src vim
+let mapleader=" "
+#+end_src
+
+- Con este comando se utiliza un ~clipboard~ especializado de ~vim~, para así no compartir espacio conn el ~clipboard~ convecional.
+
+#+begin_src vim
+set clipboard=unnamed
+#+end_src
+
+- Con las siguientes funciones activamos la sintaxis y los plugins.
+
+#+begin_src vim
+syntax enable
+filetype plugin on
+#+end_src
+
+- Mantener centrado el cursor en la pantalla:
+
+#+begin_src vim
+set scrolloff=999
+#+end_src
+
+- Estilo de texto y opciones de indentado:
+
+  #+begin_src vim
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+  #+end_src
+
+- Configuración de indice y colmnas:
+
+  #+begin_src vim
+set cursorline
+highlight CursorLine ctermbg=0 guibg=lightgrey
+set cursorcolumn
+highlight CursorColumn ctermbg=0 guibg=lightgrey
+  #+end_src
+
+- Configuración de busqueda:
+
+  #+begin_src vim
+set ignorecase
+set smartcase
+  #+end_src
+
+- Estilo de fila:
+
+  #+begin_src vim
+set nu
+set relativenumber
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+  #+end_src
+
+- Configuración de Undo:
+
+  #+begin_src vim
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
+  #+end_src
+
+- Corrector de Ortografía:
+
+  #+begin_src
+setlocal spell spelllang=es_es
+let g:myLang=0
+let g:myLangList=["nospell","es_es","en_us"]
+function! SwitchLanguage()
+    if g:myLang==0 | setlocal nospell | endif
+    if g:myLang!=0 | let &l:spelllang=g:myLangList[g:myLang] | setlocal spell | endif
+    echomsg "Lang: " g:myLangList[g:myLang]
+    let g:myLang=g:myLang + 1
+    if g:myLang >= len(g:myLangList) | let g:myLang=0 | endif
+endfunction
+map <F8> :call SwitchLanguage()<CR>
+map <F7> ]s
+map <F6> [s
+map <F5> z=
+  #+end_src
+
+- Otros:
+
+  #+begin_src
+set mouse=a
+set noerrorbells
+set modifiable
+
+"So vim stop pretending to act like vi XD
+set nocompatible
+  #+end_src
+
+** Autocmd básico
+
+#+begin_src vim
+"remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+#+end_src
+
+** Comentarios de ayuda
+
+*** finding files
+
+Search down into folders
+Provides tab-complition for all files related tasks
+set path+=**
+
+Display all matching files when we tab complete
+set wildmenu
+
++ now we can:
+  - Hit tab to :find by partial match
+  - use * to make it fuzzy
+
++ things to consider:
+  - :b lets you autocomplete any open buffer
+
+*** tag jumping
+
+Create the tag file (may need to install ctags first)
+command! MakeTags !ctags -R .
+
++ now we can:
+  - Use ^] to jump to tag under cursor
+  - Use g^] for ambiguous tags
+  - Use ^] to jump back up the tag stack
+
++ things to consider:
+  - This doesn't help if you want a visual list of tags
+
+*** autocomplete
+
+The good stuff documented in |ins-completion|
+
++ highlight:
+  - ^x^n for JUST this file
+  - ^x^f for filenames (work+ ith our path trick!)
+  - ^x^] for tags only
+  - ^n + r anything specifie+ by the 'complete' option
+
+
+* Plugins y Keybindigns
+** Cargar Plug
+
+- Confirmar que ~plug~ está instalado:
+
+#+begin_src vim
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+#+end_src
+
+- Función de instalación:
+
+  #+begin_src vim
+call plug#begin('~/.vim/plugged')
+" ========| Go lang |======== "
+Plug 'fatih/vim-go'
+
+" ========| utilities |======== "
+Plug 'SirVer/ultisnips'
+Plug 'tweekmonster/gofmt.vim'
+Plug 'mbbill/undotree'
+Plug 'sheerun/vim-polyglot'
+
+" ========| searching |======== "
+Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" ========| files & directories |======== "
+Plug 'scrooloose/nerdtree'
+
+" ========| git |======== "
+Plug 'idanarye/vim-merginal'
+Plug 'tpope/vim-fugitive'
+
+" ========| documentation |======== "
+Plug 'vim-utils/vim-man'
+
+" ========| theme |======== "
+Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
+Plug 'flazz/vim-colorschemes'
+Plug 'vim-airline/vim-airline'
+
+" ========| LaTeX |======== "
+Plug 'lervag/vimtex'
+Plug 'KeitaNakamura/tex-conceal.vim'
+
+" ========| autocompletar |======== "
+Plug 'vim-scripts/AutoComplPop'
+Plug 'Ternjs/tern_for_vim', { 'do' : 'npm install' }
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+set completeopt-=preview
+
+" ========| other |======== "
+Plug 'sotte/presenting.vim'
+
+call plug#end()
+  #+end_src
+
+** Configuración Plugins y Keybindings Relacionados
+
+- Theme:
+
+#+begin_src vim vim
+colorscheme gruvbox
+set background=dark
+#+end_src
+
+- FuzzySearch:
+
+  #+begin_src vim
+nnoremap <Leader>ps :Rg!<space>
+nnoremap <C-f>c :Commits<CR>
+nnoremap <C-f>g :GFiles<CR>
+nnoremap <C-f>f :Files<CR>
+nnoremap <Leader>pf :Files<CR>
+#+end_src
+
+- Undotree
+
+#+begin_src vim
+nnoremap <leader>u :UndotreeShow<CR>
+#+end_src
+
+- Nerdtree
+
+  #+begin_src vim
+nnoremap <C-g> :NERDTreeToggle<CR>
+  #+end_src
+
+- GitHub
+
+  #+begin_src vim
+nmap <leader>gp ::Git push<CR>
+nmap <leader>gc ::Git commit<CR>
+nmap <leader>gs :G<CR>
+nmap <leader>gt :!git add -p <CR>
+nmap <leader>gL :!git log <CR>
+  #+end_src
+
+- Auto Completar
+
+  #+begin_src vim
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+Plug 'SirVer/ultisnips'
+    let g:UltiSnipsExpandTrigger = '<tab>'
+    let g:UltiSnipsJumpForwardTrigger = '<tab>'
+    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+  #+end_src
+
+- \(\LaTeX\)
+
+  #+begin_src vim
+let g:ycm_filetype_blacklist = {
+    \ 'tex' : 1
+    \}
+
+Plug 'lervag/vimtex'
+    let g:tex_flavor='pdftex'
+    let g:vimtex_view_general_viewer = 'okular'
+    let g:vimtex_view_general_options= '--unique file:@pdf/#src:@line@tex'
+    let g:vimtex_view_general_options_latexmk= '--unique'
+    let g:vimtex_quickfix_open_on_warning = 0
+    let g:vimtex_quickfix_mode = 2
+
+
+Plug 'KeitaNakamura/tex-conceal.vim'
+    set conceallevel=1
+    let g:tex_conceal='abdmg'
+    hi Conceal ctermbg=none
+
+" create figures "
+autocmd FileType tex map <leader>ff :silent execute '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
+" edit figures
+autocmd FileType tex map <leader>f : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
+  #+end_src
+
+** Keybindigns Personales
+
+- Básicos:
+
+#+begin_src vim
+"Save a file
+nnoremap <leader>. : <CR>:w <CR>
+
+"surfing between buffers
+nnoremap <leader>0 : <CR>:bd<CR>
+nnoremap <leader>1 : <CR>:b1<CR>
+nnoremap <leader>2 : <CR>:b2<CR>
+nnoremap <leader>3 : <CR>:b3<CR>
+nnoremap <leader>4 : <CR>:b4<CR>
+nnoremap <leader>5 : <CR>:b5<CR>
+nnoremap <leader>6 : <CR>:b6<CR>
+nnoremap <leader>7 : <CR>:b7<CR>
+nnoremap <leader>8 : <CR>:b8<CR>
+nnoremap <leader>9 : <CR>:b9<CR>
+
+"reload actual file
+nnoremap <leader>s : <CR>:source %<CR>
+
+"surfing between screens
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+
+"rezise screen
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
+#+end_src
+
+- JSON:
+
+  #+begin_src vim
+" json one liner
+nnoremap <C-j> v%k<CR>:%j<CR>$w
+  #+end_src
+
+- Moverse dentro de las plantillas <++>:
+
+  #+begin_src vim
+nmap <leader>, /<++><CR>vf>c
+  #+end_src
+
+- Clipboard
+
+  #+begin_src
+vnoremap <C-v> <ESC>"+pa
+vnoremap <C-c> "+y
+vnoremap <C-d> "+d
+  #+end_src
+
+** Keybindigs Especificas para algunos tipos de archivos
+
+- Python
+
+  #+begin_src vim
+autocmd FileType python map <leader><leader> :!clear & python3 % <CR>
+autocmd FileType python map <leader>b :!clear & black % <CR>
+  #+end_src
+
+- \(\LaTeX\)
+
+  #+begin_src vim
+autocmd FileType tex map <leader><leader> \ll
+" autocmd FileType tex map <leader><leader>  :!pdflatex % & clear<CR>
+autocmd FileType tex map <leader>s :!deepin-screenshot &clear<CR>
+"autocmd FileType tex map <leader><leader><leader> :!clear & python3 /home/jpi/Desktop/inkscape-shortcut-manager/main.py &<CR>
+  #+end_src
+
+- R
+
+  #+begin_src vim
+autocmd FileType r map <leader><leader> :!clear & Rscript % <CR>
+  #+end_src
+
+- C++
+
+  #+begin_src vim
+autocmd FileType cpp map <leader><leader> :!clear & g++ -std=c++14 -Wall -Wextra -Werror % <CR>
+autocmd FileType cpp map <leader><leader><leader> :!clear & ./a.out <CR>
+  #+end_src
+
+- JavaScript
+
+  #+begin_src vim
+autocmd FileType javascript map <leader><leader> :!clear & node % <CR>
+  #+end_src
+
+- Golang
+
+  #+begin_src vim
+autocmd FileType go map <leader><leader> :!clear & go run % <CR>
+autocmd FileType go map <leader><leader><leader> :!clear & go run * <CR>
+  #+end_src

@@ -1,3 +1,11 @@
 snippet date "dd.mm.aaaa" w
 ${2:${1:`date +%d`}.`date +%m`}.`date +%Y`
 endsnippet
+
+snippet link "new link" i
+[${1:${VISUAL}}](${2:link} "${3:id}")$0
+endsnippet
+
+snippet >> ">> text <<" iA
+>> $1 <<$0
+endsnippet

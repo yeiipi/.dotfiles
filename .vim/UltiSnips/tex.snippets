@@ -79,13 +79,11 @@ ${0:${VISUAL}}
 endsnippet
 
 snippet {{ "big array" w
-
 \left\\{
 	\begin{array}{ll}
-		${1:x}  &  ${2:x \geq 0}$0 \\\\
+		${1:${VISUAL}}
 	\end{array}
-\right.
-
+\right.$0
 endsnippet
 
 priority 100
@@ -127,6 +125,23 @@ snippet fd "P($)" w
 f\left($1\right)$0
 endsnippet
 
+snippet mean "E[X]" wi
+\mathbb{E}\left[${1:X}\right] $0
+endsnippet
+
+snippet FGM "F.G.M" w
+\(F.G.M.\) $0
+endsnippet
+
+snippet FGMa "M_X(s)" w
+M_{${1:X}}\left(s\right) $0
+endsnippet
+
+
+snippet FGMb "M_X(s)=e^X" w
+M_{${1:X}}\left(s\right) &= \mathbb{E} \left[e^{$1}\right] $0
+endsnippet
+
 snippet enum "Enumerate" b
 \begin{enumerate}
 	\item $0
@@ -148,6 +163,11 @@ snippet desc "Description" b
 	\item[$1] $0
 \end{description}
 endsnippet
+
+# ==============================================================================
+# |/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/
+# /|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|/|
+# ==============================================================================
 
 snippet minipage "new mini page" w
 \begin{minipage}{ ${1:0.50} \\textwidth}
@@ -186,17 +206,13 @@ else:
 endsnippet
 
 snippet dm "Math" wA
-\[
-${1:${VISUAL}}
-.\] $0
+\[${1:${VISUAL}}\]`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+	snip.rv = ' '
+else:
+	snip.rv = ''
+`$2
 endsnippet
-
-snippet ali "Align" bA
-\begin{align*}
-	${1:${VISUAL}}
-.\end{align*}
-endsnippet
-
 
 # context "math()"
 snippet // "Fraction" iA
@@ -274,6 +290,10 @@ snippet == "equals" iA
 &= $1 \\\\
 endsnippet
 
+snippet && "html &" iA
+&amp;$0
+endsnippet
+
 snippet != "equals" iA
 \neq
 endsnippet
@@ -288,18 +308,28 @@ snippet floor "floor" i
 \left\lfloor $1 \right\rfloor$0
 endsnippet
 
-snippet pmat "pmat" iA
-\begin{pmatrix} $1 \end{pmatrix} $0
+snippet Mat "bmat" w
+\begin{matrix} ${1:${VISUAL}} \end{matrix} $0
 endsnippet
 
-snippet bmat "bmat" iA
-\begin{bNiceMatrix}[${1:first-row,first-col}]
-$2$0
-\end{bNiceMatrix}
+snippet pmat "pmat" i
+\begin{pmatrix} ${1:${VISUAL}} \end{pmatrix} $0
 endsnippet
 
-snippet nmat "nmat" iA
-\begin{bmatrix} $1 \end{bmatrix} $0
+snippet bmat "bmat" w
+\begin{bmatrix} ${1:${VISUAL}} \end{bmatrix} $0
+endsnippet
+
+snippet Bmat "Bmat" w
+\begin{Bmatrix} ${1:${VISUAL}} \end{Bmatrix} $0
+endsnippet
+
+snippet vmat "vmat" w
+\begin{vmatrix} ${1:${VISUAL}} \end{vmatrix} $0
+endsnippet
+
+snippet Vmat "Vmat" w
+\begin{Vmatrix} ${1:${VISUAL}} \end{Vmatrix} $0
 endsnippet
 
 # context "math()"
@@ -332,7 +362,7 @@ snippet lr[ "left[ right]" i
 endsnippet
 
 snippet lra "leftangle rightangle" iA
-\left<${1:${VISUAL}}\right>$0
+\langle ${1:${VISUAL}} \rangle$0
 endsnippet
 
 # context "math()"
@@ -341,7 +371,7 @@ snippet conj "conjugate" i
 endsnippet
 
 # context "math()"
-snippet vect "vector" iA
+snippet vect "vector" i
 \overrightarrow{$1}$0
 endsnippet
 
@@ -391,7 +421,7 @@ endsnippet
 
 # context "math()"
 snippet rd "to the ... power" i
-^{($1)}$0
+^{\left($1\right)}$0
 endsnippet
 
 snippet __ "subscript" iA
@@ -434,7 +464,7 @@ endsnippet
 
 # context "math()"
 snippet comb "combinatoria" i
-{$1}\choose{$2}$0
+{{$1}\choose{$2}} $0
 endsnippet
 
 # context "math()"
@@ -530,7 +560,7 @@ endsnippet
 
 # context "math()"
 snippet norm "norm" i
-\|$1\|$0
+\left\lVert $1 \right\rVert$0
 endsnippet
 
 priority 100
@@ -706,7 +736,7 @@ endsnippet
 
 priority 10
 # context "math()"
-snippet "bar" "bar" riA
+snippet "bar" "bar" ri
 \overline{$1}$0
 endsnippet
 
@@ -718,7 +748,7 @@ endsnippet
 
 priority 10
 # context "math()"
-snippet "hat" "hat" riA
+snippet "hat" "hat" ri
 \hat{$1}$0
 endsnippet
 
@@ -822,7 +852,7 @@ snippet eta "\eta η" i
 \eta $0
 endsnippet
 
-snippet theta "\theta θ" i
+snippet thetA "\theta θ" iA
 \theta $0
 endsnippet
 

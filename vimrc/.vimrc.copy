@@ -119,6 +119,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+"
+" ========| Go lang |======== "
+Plug 'fatih/vim-go'
 
 " ========| utilities |======== "
 Plug 'SirVer/ultisnips'
@@ -154,7 +157,7 @@ Plug 'KeitaNakamura/tex-conceal.vim'
 " ========| autocompletar |======== "
 Plug 'vim-scripts/AutoComplPop'
 Plug 'Ternjs/tern_for_vim', { 'do' : 'npm install' }
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 set completeopt-=preview
 
 " ========| other |======== "
@@ -171,7 +174,7 @@ set background=dark
 nnoremap <C-j> v%k<CR>:%j<CR>$w
 
 " clipboard related
-vnoremap <C-v> "+pa
+vnoremap <C-v> <ESC>"+pa
 vnoremap <C-c> "+y
 vnoremap <C-d> "+d
 
@@ -217,8 +220,8 @@ nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <C-g> :NERDTreeToggle<CR>
 
 "github related
-nmap <leader>gp ::Gpush<CR>
-nmap <leader>gc ::Gcommit<CR>
+nmap <leader>gp ::Git push<CR>
+nmap <leader>gc ::Git commit<CR>
 nmap <leader>gs :G<CR>
 nmap <leader>gt :!git add -p <CR>
 nmap <leader>gL :!git log <CR>
@@ -270,12 +273,16 @@ autocmd FileType tex map <leader>ff :silent execute '.!inkscape-figures create "
 " edit figures
 autocmd FileType tex map <leader>f : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 
+
+
 " ========| filetype keybindings |======== "
 "python
 autocmd FileType python map <leader><leader> :!clear & python3 % <CR>
+autocmd FileType python map <leader>b :!clear & black % <CR>
 
 "LaTeX
 autocmd FileType tex map <leader><leader> \ll
+" autocmd FileType tex map <leader><leader>  :!pdflatex % & clear<CR>
 autocmd FileType tex map <leader>s :!deepin-screenshot &clear<CR>
 "autocmd FileType tex map <leader><leader><leader> :!clear & python3 /home/jpi/Desktop/inkscape-shortcut-manager/main.py &<CR>
 
@@ -288,3 +295,7 @@ autocmd FileType cpp map <leader><leader><leader> :!clear & ./a.out <CR>
 
 "javascript
 autocmd FileType javascript map <leader><leader> :!clear & node % <CR>
+
+"go
+autocmd FileType go map <leader><leader> :!clear & go run % <CR>
+autocmd FileType go map <leader><leader><leader> :!clear & go run * <CR>

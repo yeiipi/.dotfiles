@@ -1,13 +1,46 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+#+TITLE: bashrc config
+#+PROPERTY: header-args :tangle .bashrc
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+
+En este archivo se encuentra la configuración que utilizo para mi ~.bashrc~.
+
+* Tabla de contenidos :toc:
+- [[#inicio-de-sesión-personalizado][Inicio de sesión personalizado]]
+- [[#inicio-de-sesión-default][Inicio de sesión default]]
+- [[#personalización][Personalización]]
+  - [[#terminal-promt][Terminal promt]]
+  - [[#nvm][NVM]]
+  - [[#alias][Alias]]
+
+* Inicio de sesión personalizado
+
+
+El comando ~startUP~ es un comando en python que hice yo para correr ciertos
+comandos unicamente una vez, cuando se abre por primera vez la terminal despues
+de haber encendido el  computador.
+
+
+ #+BEGIN_SRC bash
+startUP
+ #+END_SRC
+
+ Ahora, al utilizar el siguiente comando, permite utilizar los ~keybindings~ de
+ ~vi~ en la terminal.
+
+#+BEGIN_SRC bash
 set -o vi
+#+END_SRC
 
+* Inicio de sesión default
 
+Los comandos en esta sección hacen parte de aquellos que vienen por default en
+el archivo ~.bashrc~.
+
+#+BEGIN_SRC bash
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+    ,*i*) ;;
+      ,*) return;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -58,19 +91,12 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1="\[\033[38;5;9m\]\h\[$(tput sgr0)\]\[\033[38;5;77m\]{\[$(tput sgr0)\]\[\033[38;5;142m\]\u\[$(tput sgr0)\]\[\033[38;5;77m\]}\[$(tput sgr0)\]\[\033[38;5;135m\][\[$(tput sgr0)\]\[\033[38;5;142m\]\w\[$(tput sgr0)\]\[\033[38;5;135m\]]\[$(tput sgr0)\]\n\t \[$(tput sgr0)\]\[\033[38;5;9m\]>\[$(tput sgr0)\] \[$(tput sgr0)\]"
-else
-    PS1="\h\[$(tput sgr0)\]{\[$(tput sgr0)\]\u\[$(tput sgr0)\]}\[$(tput sgr0)\][\[$(tput sgr0)\]\w\[$(tput sgr0)\]]\[$(tput sgr0)\]\n\t \[$(tput sgr0)\]>\[$(tput sgr0)\] \[$(tput sgr0)\]"
-fi
-unset color_prompt force_color_prompt
-
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
-*)
+,*)
     ;;
 esac
 
@@ -113,19 +139,48 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-# ============================================================================ #
+#+END_SRC
 
-#NVM
+#+RESULTS:
+
+* Personalización
+
+** Terminal promt
+
+El siguiente comando modifica el promt de la terminal, en este caso no es el
+original que viene por default sino que tiene algunos cambios para ajustarse a
+mis gustos personales.
+
+#+BEGIN_SRC bash
+if [ "$color_prompt" = yes ]; then
+    PS1="\[\033[38;5;9m\]\h\[$(tput sgr0)\]\[\033[38;5;77m\]{\[$(tput sgr0)\]\[\033[38;5;142m\]\u\[$(tput sgr0)\]\[\033[38;5;77m\]}\[$(tput sgr0)\]\[\033[38;5;135m\][\[$(tput sgr0)\]\[\033[38;5;142m\]\w\[$(tput sgr0)\]\[\033[38;5;135m\]]\[$(tput sgr0)\]\n\t \[$(tput sgr0)\]\[\033[38;5;9m\]>\[$(tput sgr0)\] \[$(tput sgr0)\]"
+else
+    PS1="\h\[$(tput sgr0)\]{\[$(tput sgr0)\]\u\[$(tput sgr0)\]}\[$(tput sgr0)\][\[$(tput sgr0)\]\w\[$(tput sgr0)\]]\[$(tput sgr0)\]\n\t \[$(tput sgr0)\]>\[$(tput sgr0)\] \[$(tput sgr0)\]"
+fi
+unset color_prompt force_color_prompt
+#+END_SRC
+
+** NVM
+
+#+BEGIN_SRC bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# P E R S O N A L    A L I A S
+export PATH=$HOME/.emacs.d/bin:$PATH:$HOME/go/bin
+#+END_SRC
+
+** Alias
+
+Los ~alias~ los suelo utilizar para facilitar el uso de comandos frecuentemente
+utilizados.
+
+#+BEGIN_SRC bash
 alias data='cd /media/Data/'
 alias ur='cd /media/Data/Universidad/'
 alias musica='cd /media/Data/Musica/'
-alias sdn='shutdown now'
-alias rbn='shutdown -r now'
+alias sdn='shutDOWN;shutdown now'
+alias rbn='shutDOWN;shutdown -r now'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -138,19 +193,16 @@ alias ghidra="/home/jpi/programs/ghidra_9.1.2_PUBLIC/ghidraRun"
 alias newfonts="fc-cache -f -v"
 alias webstorm="webstorm.sh & disown"
 alias cleon="sh /opt/clion-*/bin/clion.sh & disown"
-alias obsidian="~/programs/Obsidian-0.10.6.AppImage & disown"
+alias obsidian="~/programs/Obsidian.AppImage & disown"
 alias kr="ibus-setup & disown"
-alias matlab="/usr/local/MATLAB/R2020b/bin/matlab & disown"
-
-
-
-# Variables de entorno
-UN_PATH="/home/jpi/.dotfiles/.USER"
-read -d $'\x04' UR_USERNAME < "$UN_PATH"
-export UR_USERNAME
-
-UP_PATH="/home/jpi/.dotfiles/.PASS"
-read -d $'\x04' UR_PASSWORD < "$UP_PATH"
-export UR_PASSWORD
-
-
+alias matlab="/usr/local/MATLAB/R2021a/bin/matlab & disown"
+alias mendeley="mendeleydesktop & disown"
+alias kkdiscord="pkill -KILL Discord"
+alias kkzoom="pkill -KILL zoom"
+alias kkfirefox="pkill -KILL firefox"
+alias kkchrome="pkill -KILL chrome"
+alias kkk="kkdiscord ; kkzoom ; kkfirefox ; kkchrome"
+alias nessus="/bin/systemctl start nessusd.service"
+alias aaaa="clear;cal;tareas"
+alias dl_mus="youtube-dl --add-metadata -f 'bestaudio/best' -ciw -o '%(title)s.%(ext)s' -v --extract-audio --audio-quality 0 --audio-format opus --download-archive downloaded.txt"
+#+END_SRC

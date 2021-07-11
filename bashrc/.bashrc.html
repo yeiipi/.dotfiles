@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-07-10 sáb 19:25 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>bashrc config</title>
+<meta name="author" content="Juan Pablo Sierra Useche" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">bashrc config</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org93345bd">1. Tabla de contenidos</a></li>
+<li><a href="#org79253da">2. Inicio de sesión personalizado</a></li>
+<li><a href="#orgb31f8a2">3. Inicio de sesión default</a></li>
+<li><a href="#org27d608a">4. Personalización</a>
+<ul>
+<li><a href="#orgc6568cc">4.1. Terminal promt</a></li>
+<li><a href="#org478f456">4.2. NVM</a></li>
+<li><a href="#org7b4c97c">4.3. Alias</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+En este archivo se encuentra la configuración que utilizo para mi <code>.bashrc</code>.
+</p>
+
+<div id="outline-container-org93345bd" class="outline-2">
+<h2 id="org93345bd"><span class="section-number-2">1</span> Tabla de contenidos</h2>
+</div>
+
+<div id="outline-container-org79253da" class="outline-2">
+<h2 id="org79253da"><span class="section-number-2">2</span> Inicio de sesión personalizado</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+El comando <code>startUP</code> es un comando en python que hice yo para correr ciertos
+comandos unicamente una vez, cuando se abre por primera vez la terminal despues
+de haber encendido el  computador.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-bash">startUP
+</pre>
+</div>
+
+<p>
+Ahora, al utilizar el siguiente comando, permite utilizar los <code>keybindings</code> de
+vi en la terminal.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #c678dd;">set</span> -o vi
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb31f8a2" class="outline-2">
+<h2 id="orgb31f8a2"><span class="section-number-2">3</span> Inicio de sesión default</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Los comandos en esta sección hacen parte de aquellos que vienen por default en
+el archivo <code>.bashrc</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #5B6268;"># </span><span style="color: #5B6268;">If not running interactively, don't do anything</span>
+<span style="color: #51afef;">case</span> $<span style="color: #dcaeea;">-</span><span style="color: #51afef;"> in</span>
+    *i*) ;;
+      *) <span style="color: #51afef;">return</span>;;
+<span style="color: #51afef;">esac</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">don't put duplicate lines or lines starting with space in the history.</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">See bash(1) for more options</span>
+<span style="color: #dcaeea;">HISTCONTROL</span>=ignoreboth
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">append to the history file, don't overwrite it</span>
+<span style="color: #c678dd;">shopt</span> -s histappend
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">for setting history length see HISTSIZE and HISTFILESIZE in bash(1)</span>
+<span style="color: #dcaeea;">HISTSIZE</span>=<span style="color: #da8548; font-weight: bold;">1000</span>
+<span style="color: #dcaeea;">HISTFILESIZE</span>=<span style="color: #da8548; font-weight: bold;">2000</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">check the window size after each command and, if necessary,</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">update the values of LINES and COLUMNS.</span>
+<span style="color: #c678dd;">shopt</span> -s checkwinsize
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">If set, the pattern "**" used in a pathname expansion context will</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">match all files and zero or more directories and subdirectories.</span>
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">shopt -s globstar</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">make</span><span style="color: #5B6268;"> </span><span style="color: #5B6268;">less</span><span style="color: #5B6268;"> more friendly for non-text input files, see lesspipe(1)</span>
+<span style="color: #51afef;">[</span> -x /usr/bin/lesspipe <span style="color: #51afef;">]</span> &amp;&amp; <span style="color: #c678dd;">eval</span> <span style="color: #98be65;">"</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">SHELL</span><span style="color: #51afef; font-weight: bold;">=/bin/sh lesspipe)</span><span style="color: #98be65;">"</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">set variable identifying the chroot you work in (used in the prompt below)</span>
+<span style="color: #51afef;">if</span> <span style="color: #51afef;">[</span> -z <span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">{debian_chroot:-}</span><span style="color: #98be65;">"</span> <span style="color: #51afef;">]</span> &amp;&amp; <span style="color: #51afef;">[</span> -r /etc/debian_chroot <span style="color: #51afef;">]</span>; <span style="color: #51afef;">then</span>
+    <span style="color: #dcaeea;">debian_chroot</span>=$<span style="color: #51afef;">(</span><span style="color: #51afef; font-weight: bold;">cat</span> /etc/debian_chroot<span style="color: #51afef;">)</span>
+<span style="color: #51afef;">fi</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">set a fancy prompt (non-color, unless we know we "want" color)</span>
+<span style="color: #51afef;">case</span> <span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">TERM</span><span style="color: #98be65;">"</span><span style="color: #51afef;"> in</span>
+    xterm-color|*-256color) <span style="color: #dcaeea;">color_prompt</span>=yes;;
+<span style="color: #51afef;">esac</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">uncomment for a colored prompt, if the terminal has the capability; turned</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">off by default to not distract the user: the focus in a terminal window</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">should be on the output of commands, not on the prompt</span>
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">force_color_prompt=yes</span>
+
+<span style="color: #51afef;">if</span> <span style="color: #51afef;">[</span> -n <span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">force_color_prompt</span><span style="color: #98be65;">"</span> <span style="color: #51afef;">]</span>; <span style="color: #51afef;">then</span>
+    <span style="color: #51afef;">if</span> <span style="color: #51afef;">[</span> -x /usr/bin/tput <span style="color: #51afef;">]</span> &amp;&amp; tput setaf <span style="color: #da8548; font-weight: bold;">1</span> &gt;&amp;/dev/null; <span style="color: #51afef;">then</span>
+    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">We have color support; assume it's compliant with Ecma-48</span>
+    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">(ISO/IEC-6429). (Lack of such support is extremely rare, and such</span>
+    <span style="color: #5B6268;"># </span><span style="color: #5B6268;">a case would tend to support setf rather than setaf.)</span>
+    <span style="color: #dcaeea;">color_prompt</span>=yes
+    <span style="color: #51afef;">else</span>
+    <span style="color: #dcaeea;">color_prompt</span>=
+    <span style="color: #51afef;">fi</span>
+<span style="color: #51afef;">fi</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">If this is an xterm set the title to user@host:dir</span>
+<span style="color: #51afef;">case</span> <span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">TERM</span><span style="color: #98be65;">"</span><span style="color: #51afef;"> in</span>
+xterm*|rxvt*)
+    <span style="color: #dcaeea;">PS1</span>=<span style="color: #98be65;">"\[\e]0;</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">{debian_chroot:+($debian_chroot)}</span><span style="color: #98be65;">\u@\h: \w\a\]</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">PS1</span><span style="color: #98be65;">"</span>
+    ;;
+*)
+    ;;
+<span style="color: #51afef;">esac</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">enable color support of </span><span style="color: #5B6268;">ls</span><span style="color: #5B6268;"> and also add handy aliases</span>
+<span style="color: #51afef;">if</span> <span style="color: #51afef;">[</span> -x /usr/bin/dircolors <span style="color: #51afef;">]</span>; <span style="color: #51afef;">then</span>
+    <span style="color: #c678dd;">test</span> -r ~/.dircolors &amp;&amp; <span style="color: #c678dd;">eval</span> <span style="color: #98be65;">"</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">dircolors</span><span style="color: #51afef; font-weight: bold;"> -b ~/.dircolors)</span><span style="color: #98be65;">"</span> || <span style="color: #c678dd;">eval</span> <span style="color: #98be65;">"</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">dircolors</span><span style="color: #51afef; font-weight: bold;"> -b)</span><span style="color: #98be65;">"</span>
+    <span style="color: #c678dd;">alias</span> <span style="color: #ECBE7B;">ls</span>=<span style="color: #98be65;">'</span><span style="color: #98be65;">ls</span><span style="color: #98be65;"> --color=auto'</span>
+    <span style="color: #5B6268;">#</span><span style="color: #5B6268;">alias dir='dir --color=auto'</span>
+    <span style="color: #5B6268;">#</span><span style="color: #5B6268;">alias vdir='vdir --color=auto'</span>
+
+    <span style="color: #c678dd;">alias</span> <span style="color: #ECBE7B;">grep</span>=<span style="color: #98be65;">'</span><span style="color: #98be65;">grep</span><span style="color: #98be65;"> --color=auto'</span>
+    <span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">fgrep</span>=<span style="color: #98be65;">'fgrep --color=auto'</span>
+    <span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">egrep</span>=<span style="color: #98be65;">'egrep --color=auto'</span>
+<span style="color: #51afef;">fi</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">colored GCC warnings and errors</span>
+<span style="color: #5B6268;">#</span><span style="color: #5B6268;">export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'</span>
+
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Add an "alert" alias for long running commands.  Use like so:</span>
+<span style="color: #5B6268;">#   </span><span style="color: #5B6268;">sleep</span><span style="color: #5B6268;"> 10; alert</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">alert</span>=<span style="color: #98be65;">'notify-send --urgency=low -i "$([ $? = 0 ] &amp;&amp; </span><span style="color: #98be65;">echo</span><span style="color: #98be65;"> terminal || </span><span style="color: #98be65;">echo</span><span style="color: #98be65;"> error)" "$(</span><span style="color: #51afef; font-weight: bold;">history</span><span style="color: #98be65;">|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&amp;|]\s*alert$//'\'')"'</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">Alias definitions.</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">You may want to put all your additions into a separate file like</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">~/.bash_aliases, instead of adding them here directly.</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">See /usr/share/doc/bash-doc/examples in the bash-doc package.</span>
+
+<span style="color: #51afef;">if</span> <span style="color: #51afef;">[</span> -f ~/.bash_aliases <span style="color: #51afef;">]</span>; <span style="color: #51afef;">then</span>
+    <span style="color: #c678dd;">.</span> ~/.bash_aliases
+<span style="color: #51afef;">fi</span>
+
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">enable programmable completion features (you don't need to enable</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">this, if it's already enabled in /etc/bash.bashrc and /etc/profile</span>
+<span style="color: #5B6268;"># </span><span style="color: #5B6268;">sources /etc/bash.bashrc).</span>
+<span style="color: #51afef;">if ! </span><span style="color: #c678dd;">shopt</span> -oq posix; <span style="color: #51afef;">then</span>
+  <span style="color: #51afef;">if</span> <span style="color: #51afef;">[</span> -f /usr/share/bash-completion/bash_completion <span style="color: #51afef;">]</span>; <span style="color: #51afef;">then</span>
+    <span style="color: #c678dd;">.</span> /usr/share/bash-completion/bash_completion
+  <span style="color: #51afef;">elif</span> <span style="color: #51afef;">[</span> -f /etc/bash_completion <span style="color: #51afef;">]</span>; <span style="color: #51afef;">then</span>
+    <span style="color: #c678dd;">.</span> /etc/bash_completion
+  <span style="color: #51afef;">fi</span>
+<span style="color: #51afef;">fi</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org27d608a" class="outline-2">
+<h2 id="org27d608a"><span class="section-number-2">4</span> Personalización</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgc6568cc" class="outline-3">
+<h3 id="orgc6568cc"><span class="section-number-3">4.1</span> Terminal promt</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+El siguiente comando modifica el promt de la terminal, en este caso no es el
+original que viene por default sino que tiene algunos cambios para ajustarse a
+mis gustos personales.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #51afef;">if</span> <span style="color: #51afef;">[</span> <span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">color_prompt</span><span style="color: #98be65;">"</span> = yes <span style="color: #51afef;">]</span>; <span style="color: #51afef;">then</span>
+    <span style="color: #dcaeea;">PS1</span>=<span style="color: #98be65;">"\[\033[38;5;9m\]\h\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]\[\033[38;5;77m\]{\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]\[\033[38;5;142m\]\u\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]\[\033[38;5;77m\]}\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]\[\033[38;5;135m\][\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]\[\033[38;5;142m\]\w\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]\[\033[38;5;135m\]]\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]\n\t \[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]\[\033[38;5;9m\]&gt;\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\] \[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]"</span>
+<span style="color: #51afef;">else</span>
+    <span style="color: #dcaeea;">PS1</span>=<span style="color: #98be65;">"\h\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]{\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]\u\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]}\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\][\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]\w\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]]\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]\n\t \[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]&gt;\[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\] \[</span><span style="color: #51afef; font-weight: bold;">$(</span><span style="color: #51afef; font-weight: bold;">tput</span><span style="color: #51afef; font-weight: bold;"> sgr0)</span><span style="color: #98be65;">\]"</span>
+<span style="color: #51afef;">fi</span>
+<span style="color: #c678dd;">unset</span> color_prompt force_color_prompt
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org478f456" class="outline-3">
+<h3 id="org478f456"><span class="section-number-3">4.2</span> NVM</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #c678dd;">export</span> <span style="color: #dcaeea;">NVM_DIR</span>=<span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">HOME</span><span style="color: #98be65;">/.nvm"</span>
+<span style="color: #51afef;">[</span> -s <span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">NVM_DIR</span><span style="color: #98be65;">/nvm.sh"</span> <span style="color: #51afef;">]</span> &amp;&amp; <span style="color: #98be65;">\.</span> <span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">NVM_DIR</span><span style="color: #98be65;">/nvm.sh"</span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">This loads nvm</span>
+<span style="color: #51afef;">[</span> -s <span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">NVM_DIR</span><span style="color: #98be65;">/bash_completion"</span> <span style="color: #51afef;">]</span> &amp;&amp; <span style="color: #98be65;">\.</span> <span style="color: #98be65;">"</span><span style="color: #a9a1e1;">$</span><span style="color: #dcaeea;">NVM_DIR</span><span style="color: #98be65;">/bash_completion"</span>  <span style="color: #5B6268;"># </span><span style="color: #5B6268;">This loads nvm bash_completion</span>
+
+<span style="color: #c678dd;">export</span> <span style="color: #dcaeea;">PATH</span>=$<span style="color: #dcaeea;">HOME</span>/.emacs.d/bin:$<span style="color: #dcaeea;">PATH</span>:$<span style="color: #dcaeea;">HOME</span>/go/bin
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7b4c97c" class="outline-3">
+<h3 id="org7b4c97c"><span class="section-number-3">4.3</span> Alias</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Los <code>alias</code> los suelo utilizar para facilitar el uso de comandos frecuentemente
+utilizados.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">data</span>=<span style="color: #98be65;">'</span><span style="color: #98be65;">cd</span><span style="color: #98be65;"> /media/Data/'</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">ur</span>=<span style="color: #98be65;">'</span><span style="color: #98be65;">cd</span><span style="color: #98be65;"> /media/Data/Universidad/'</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">musica</span>=<span style="color: #98be65;">'</span><span style="color: #98be65;">cd</span><span style="color: #98be65;"> /media/Data/Musica/'</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">sdn</span>=<span style="color: #98be65;">'shutDOWN;shutdown now'</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">rbn</span>=<span style="color: #98be65;">'shutDOWN;shutdown -r now'</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">ll</span>=<span style="color: #98be65;">'</span><span style="color: #98be65;">ls</span><span style="color: #98be65;"> -alF'</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">la</span>=<span style="color: #98be65;">'</span><span style="color: #98be65;">ls</span><span style="color: #98be65;"> -A'</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">l</span>=<span style="color: #98be65;">'</span><span style="color: #98be65;">ls</span><span style="color: #98be65;"> -CF'</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">wifi</span>=<span style="color: #98be65;">'while [ 1 == 1 ];do ping google.com;</span><span style="color: #98be65;">sleep</span><span style="color: #98be65;"> 1; done'</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">location</span>=<span style="color: #98be65;">'</span><span style="color: #98be65;">pwd</span><span style="color: #98be65;"> | xclip -selection c'</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">pyserver</span>=<span style="color: #98be65;">'python3 -m http.server &amp;'</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">latextemp</span>=<span style="color: #98be65;">'</span><span style="color: #98be65;">cp</span><span style="color: #98be65;"> -r ~/latextemp ./'</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">pgm</span>=<span style="color: #98be65;">"/home/jpi/programs/pgmodeler/pgmodeler &amp; disown"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">ghidra</span>=<span style="color: #98be65;">"/home/jpi/programs/ghidra_9.1.2_PUBLIC/ghidraRun"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">newfonts</span>=<span style="color: #98be65;">"fc-cache -f -v"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">webstorm</span>=<span style="color: #98be65;">"webstorm.sh &amp; disown"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">cleon</span>=<span style="color: #98be65;">"sh /opt/clion-*/bin/clion.sh &amp; disown"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">obsidian</span>=<span style="color: #98be65;">"~/programs/Obsidian.AppImage &amp; disown"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">kr</span>=<span style="color: #98be65;">"ibus-setup &amp; disown"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">matlab</span>=<span style="color: #98be65;">"/usr/local/MATLAB/R2021a/bin/matlab &amp; disown"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">mendeley</span>=<span style="color: #98be65;">"mendeleydesktop &amp; disown"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">kkdiscord</span>=<span style="color: #98be65;">"</span><span style="color: #98be65;">pkill</span><span style="color: #98be65;"> -KILL Discord"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">kkzoom</span>=<span style="color: #98be65;">"</span><span style="color: #98be65;">pkill</span><span style="color: #98be65;"> -KILL zoom"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">kkfirefox</span>=<span style="color: #98be65;">"</span><span style="color: #98be65;">pkill</span><span style="color: #98be65;"> -KILL firefox"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">kkchrome</span>=<span style="color: #98be65;">"</span><span style="color: #98be65;">pkill</span><span style="color: #98be65;"> -KILL chrome"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">kkk</span>=<span style="color: #98be65;">"kkdiscord ; kkzoom ; kkfirefox ; kkchrome"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">nessus</span>=<span style="color: #98be65;">"/bin/systemctl start nessusd.service"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">aaaa</span>=<span style="color: #98be65;">"clear;cal;tareas"</span>
+<span style="color: #c678dd;">alias</span> <span style="color: #dcaeea;">dl_mus</span>=<span style="color: #98be65;">"youtube-dl --add-metadata -f 'bestaudio/best' -ciw -o '%(title)s.%(ext)s' -v --extract-audio --audio-quality 0 --audio-format opus --download-archive downloaded.txt"</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Juan Pablo Sierra Useche</p>
+<p class="date">Created: 2021-07-10 sáb 19:25</p>
+</div>
+</body>
+</html>

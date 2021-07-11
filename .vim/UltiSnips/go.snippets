@@ -1,0 +1,9 @@
+snippet print "print" i
+fmt.Printf("$1")$0
+endsnippet
+
+snippet iferr "if error" i
+if ${1:err} != nil {
+	log.Fatal($1)
+}$0
+endsnippet
